@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKEM Autofill — Formulir Kegiatan SKEM PENS</title>
+  <meta name="description" content="Isi otomatis Formulir Kegiatan SKEM PENS dan unduh sebagai PDF atau Word.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Formulir SKEM, terisi otomatis</h1>
+  <p>Isi data sekali, dapatkan <abbr title="Formulir Kegiatan SKEM">FM.MHS.PENGAJUANSKEM.2026</abbr> lengkap dengan halaman lampiran. Alat bantu tidak resmi; cek ke bagian kemahasiswaan bila formulir cetak mandiri diterima.</p>
+</header>
+
+<main class="layout">
+  <form id="f" class="form" novalidate autocomplete="on">
+
+    <section>
+      <h2><span class="num">I.</span> Identitas Mahasiswa</h2>
+      <div class="field"><label for="nama">Nama lengkap</label><input id="nama" name="nama" maxlength="60" autocomplete="name" required><p class="err" data-for="nama"></p></div>
+      <div class="field"><label for="nrp">NRP</label><input id="nrp" name="nrp" inputmode="numeric" maxlength="15" autocomplete="off" required><p class="err" data-for="nrp"></p></div>
+      <div class="field"><label for="prodi">Program studi</label><input id="prodi" name="prodi" maxlength="80" placeholder="mis. Sarjana Terapan Teknologi Rekayasa Multimedia" required><p class="err" data-for="prodi"></p></div>
+      <div class="field"><label for="departemen">Departemen</label><input id="departemen" name="departemen" maxlength="80" required><p class="err" data-for="departemen"></p></div>
+      <label class="check"><input type="checkbox" id="remember" checked> Ingat data diri ini di browser ini saja</label>
+    </section>
+
+    <section>
+      <h2><span class="num">II.</span> Informasi Kegiatan</h2>
+      <div class="field"><label for="kegiatan">Nama kegiatan</label><input id="kegiatan" name="kegiatan" maxlength="110" required><p class="err" data-for="kegiatan"></p></div>
+      <div class="row">
+        <div class="field"><label for="tanggalMulai">Tanggal mulai</label><input type="date" id="tanggalMulai" name="tanggalMulai" required><p class="err" data-for="tanggalMulai"></p></div>
+        <div class="field"><label for="tanggalSelesai">Tanggal selesai <small>(jika lebih dari sehari)</small></label><input type="date" id="tanggalSelesai" name="tanggalSelesai"><p class="err" data-for="tanggalSelesai"></p></div>
+      </div>
+      <div class="field"><label for="lokasi">Lokasi / platform</label><input id="lokasi" name="lokasi" maxlength="80" placeholder="mis. Gedung D3, PENS atau Zoom Meeting" required><p class="err" data-for="lokasi"></p></div>
+      <div class="field"><label for="penyelenggara">Penyelenggara</label><input id="penyelenggara" name="penyelenggara" maxlength="80" required><p class="err" data-for="penyelenggara"></p></div>
+      <fieldset class="field">
+        <legend>Jenis lampiran bukti kegiatan</legend>
+        <div class="chips" id="chips">
+          <label><input type="checkbox" value="Sertifikat"><span>Sertifikat</span></label>
+          <label><input type="checkbox" value="Piagam"><span>Piagam</span></label>
+          <label><input type="checkbox" value="Surat tugas"><span>Surat tugas</span></label>
+          <label><input type="checkbox" value="Dokumentasi foto"><span>Dokumentasi foto</span></label>
+          <label><input type="checkbox" value="Tangkapan layar"><span>Tangkapan layar</span></label>
+          <label><input type="checkbox" value="Daftar hadir"><span>Daftar hadir</span></label>
+        </div>
+        <input id="jenisLain" name="jenisLain" maxlength="60" placeholder="Jenis lain (opsional)" aria-label="Jenis lampiran lain">
+        <p class="err" data-for="jenis"></p>
+      </fieldset>
+    </section>
+
+    <section>
+      <h2><span class="num">Lampiran</span> Halaman 2 dan seterusnya</h2>
+      <label class="drop" id="drop" for="picker">
+        <input type="file" id="picker" accept="image/jpeg,image/png,image/webp,image/gif,application/pdf" multiple hidden>
+        <strong>Tarik berkas ke sini atau pilih dari perangkat</strong>
+        <span>JPG, PNG, WebP, atau PDF (maks. 4 halaman pertama per PDF). Hingga 12 berkas, 12 MB per berkas.</span>
+      </label>
+      <ul id="files" class="files" aria-live="polite"></ul>
+      <p class="err" id="fileErr"></p>
+      <fieldset class="field per">
+        <legend>Foto per halaman</legend>
+        <label><input type="radio" name="perPage" value="1"> 1</label>
+        <label><input type="radio" name="perPage" value="2" checked> 2</label>
+        <label><input type="radio" name="perPage" value="4"> 4</label>
+        <span id="pageHint" class="hint"></span>
+      </fieldset>
+    </section>
+
+    <section>
+      <h2><span class="num">III.</span> Verifikasi</h2>
+      <p class="note">Bagian ini sengaja dibiarkan kosong. Nama, tanda tangan, dan keputusan diisi langsung oleh verifikator.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">IV.</span> Pernyataan Mahasiswa</h2>
+      <div class="field"><label for="tanggalPengajuan">Tanggal pengajuan <small>(tertulis sebagai “Surabaya, …”)</small></label><input type="date" id="tanggalPengajuan" name="tanggalPengajuan"><p class="err" data-for="tanggalPengajuan"></p></div>
+      <div class="field">
+        <label for="sigPicker">Tanda tangan <small>(opsional, PNG transparan disarankan)</small></label>
+        <label class="drop drop-sm" id="sigDrop" for="sigPicker">
+          <input type="file" id="sigPicker" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+          <strong>Tarik gambar tanda tangan ke sini atau pilih berkas</strong>
+          <span>PNG, JPG, atau WebP (maks. 5 MB). Kosongkan bila ingin tanda tangan manual.</span>
+        </label>
+        <div id="sigPreview" class="sig-preview" hidden>
+          <img id="sigImg" alt="Pratinjau tanda tangan">
+          <div class="sig-meta">
+            <div id="sigName" class="name"></div>
+            <small>Otomatis dipasang di atas nama &amp; NRP.</small>
+          </div>
+          <button type="button" id="sigRemove" aria-label="Hapus tanda tangan">×</button>
+        </div>
+        <p class="err" id="sigErr"></p>
+      </div>
+      <label class="check"><input type="checkbox" id="pernyataan" name="pernyataan"> Saya menyatakan data dan dokumen yang saya isi dan lampirkan adalah benar dan dapat dipertanggungjawabkan.</label>
+      <p class="err" data-for="pernyataan"></p>
+    </section>
+  </form>
+
+  <aside class="desk" aria-label="Pratinjau">
+    <div class="bar">
+      <button type="button" id="btnPreview" class="primary">Buat pratinjau</button>
+      <button type="button" id="btnPdf">Unduh PDF</button>
+      <button type="button" id="btnDocx">Unduh Word</button>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite">Isi formulir, lalu buat pratinjau. Data tidak disimpan di server.</p>
+    <div class="sheet">
+      <iframe id="view" title="Pratinjau PDF formulir SKEM" hidden></iframe>
+      <p id="empty" class="empty">Pratinjau PDF akan muncul di sini.</p>
+    </div>
+    <a id="openTab" class="openTab" target="_blank" rel="noopener" hidden>Buka pratinjau di tab baru</a>
+  </aside>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>
